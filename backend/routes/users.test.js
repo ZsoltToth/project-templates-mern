@@ -1,6 +1,5 @@
-
-describe('Users testing', ()=>{
-    it('test nothing', ()=>{
-        expect(true).toBe(true);
-    })
+describe('Users testing', () => {
+  it('test nothing', () => {
+    expect(true).toBe(true)
+  })
 })
