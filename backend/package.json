@@ -6,6 +6,7 @@
     "style": "eslint .",
     "style:fix": "npm run style -- --fix",
     "start": "node ./bin/www",
+    "start:dev": "nodemon start",
     "test": "jest"
   },
   "devDependencies": {
@@ -20,7 +21,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "husky": "^4.3.6",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
