@@ -29,6 +29,8 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-validator": "^6.9.0",
-    "morgan": "~1.9.1"
+    "mongoose": "^5.11.9",
+    "morgan": "~1.9.1",
+    "winston": "^3.3.3"
   }
 }

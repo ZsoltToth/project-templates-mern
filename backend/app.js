@@ -2,6 +2,29 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const winston = require('winston')
+const log = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: new winston.transports.Console()
+})
+const config = require('./config')
+const mongoose = require('mongoose')
+
+const { host, port, name, user, password } = config.db
+const dbConnectionString = `mongodb://${host}:${port}/${name}`
+mongoose.connect(dbConnectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  auth: {
+    authSource: 'admin'
+  },
+  user: user,
+  pass: password
+}).catch(reason => {
+  log.error({ reason: reason, connectionString: dbConnectionString })
+  process.exit(1)
+})
 
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')

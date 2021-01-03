@@ -30,6 +30,30 @@ router.get('/', issuesController.readIssue)
  *
  */
 router.get('/:id', issuesController.readIssue)
+
+/**
+ * @swagger
+ * /issues:
+ *  post:
+ *      summary: create a new issue
+ *      requestBody:
+ *        content:
+ *              application/json:
+ *                 schema:
+ *                   type: object
+ *                   required: true
+ *                   properties:
+ *                      title:
+ *                          type: string
+ *                          example: Issue 1
+ *                      description:
+ *                          type: string
+ *      responses:
+ *          200:
+ *              description: success
+ *          400:
+ *              description: problem
+ */
 router.post('/', issueRequestDto, issuesController.createIssue)
 
 module.exports = router
