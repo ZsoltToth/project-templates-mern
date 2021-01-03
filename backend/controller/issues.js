@@ -1,21 +1,18 @@
 const { validationResult } = require('express-validator')
-const issues = [
-  { id: 0, title: '1st issue', description: 'Lorem ipsum...' },
-  { id: 1, title: '2nd issue', description: 'Lorem ipsum...' }
-]
+const Issue = require('../model/issue')
 
 exports.createIssue = (req, res, next) => {
   if (!validationResult(req).isEmpty()) {
     res.status(400).send({ errors: validationResult(req).array() })
     return
   }
-  res.send('Hello World!')
+  Issue.create(req.body).then(issue => res.send(issue)).catch(err => res.status(400).send(err))
 }
 
 exports.readIssue = (req, res, next) => {
   if (req.params.id === undefined) {
-    res.send(issues)
+    Issue.find().then(issues => res.send(issues))
     return
   }
-  res.send(issues.filter(issue => issue.id === parseInt(req.params.id)))
+  Issue.findById(req.params.id).then(issues => res.send(issues === null ? {} : issues)).catch(err => res.send({ error: err }))
 }
