@@ -17,5 +17,5 @@ exports.readIssue = (req, res, next) => {
     res.send(issues)
     return
   }
-  res.send(issues.filter(issue => issue.id === req.params.id))
+  res.send(issues.filter(issue => issue.id === parseInt(req.params.id)))
 }
