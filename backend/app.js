@@ -13,9 +13,11 @@ const mongoose = require('mongoose')
 
 const { host, port, name, user, password } = config.db
 const dbConnectionString = `mongodb://${host}:${port}/${name}`
+
 mongoose.connect(dbConnectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
   auth: {
     authSource: 'admin'
   },

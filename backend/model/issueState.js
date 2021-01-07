@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
   OPEN: 'open',
   CLOSED: 'closed',
   RESOLVED: 'resolved',

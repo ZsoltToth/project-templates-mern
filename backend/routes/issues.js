@@ -56,4 +56,54 @@ router.get('/:id', issuesController.readIssue)
  */
 router.post('/', issueRequestDto, issuesController.createIssue)
 
+/**
+ * @swagger
+ * /issues/{id}/in-progress:
+ *      post:
+ *          summary: set issue to "in progress" state
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/in-progress', issuesController.stateChangeToInProgress)
+
+/**
+ * @swagger
+ * /issues/{id}/resolve:
+ *      post:
+ *          summary: get issue by id
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/resolve', issuesController.stateChangeToResolved)
+/**
+ * @swagger
+ * /issues/{id}/close:
+ *      post:
+ *          summary: get issue by id
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/close', issuesController.stateChangeToClosed)
+
 module.exports = router

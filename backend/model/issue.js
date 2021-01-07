@@ -8,7 +8,16 @@ const IssueSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true
+  },
+  state: {
+    type: String,
+    required: true
   }
+})
+
+IssueSchema.pre('findOneAndUpdate', next => {
+  console.log('pre update hook')
+  next()
 })
 
 module.exports = mongoose.model('issue', IssueSchema)
