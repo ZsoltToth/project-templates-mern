@@ -1,21 +1,20 @@
 jest.mock('../model/issue')
 const Issue = require('../model/issue')
-// const issueState = require('../model/issueState')
+const issueState = require('../model/issueState')
 const service = require('./issues')
 
-// const ISSUE_ID = '5ff6ed85f1c52e5bb6d4a7f9'
+const ISSUE_ID = '5ff6ed85f1c52e5bb6d4a7f9'
+const INVALID_ISSUE_ID = '000000000000000000000000'
 const ISSUE_CREATION_REQUEST = {
   title: 'Issue Template',
   description: 'Description'
 }
-/*
 const OPEN_ISSUE = {
-    ...ISSUE_CREATION_REQUEST,
-    _id: ISSUE_ID,
-    state: issueState.OPEN,
-    __v: 0
+  ...ISSUE_CREATION_REQUEST,
+  _id: ISSUE_ID,
+  state: issueState.OPEN,
+  __v: 0
 }
- */
 
 describe('Issue Service Test', () => {
   it('Test Create Issue', () => {
@@ -23,5 +22,23 @@ describe('Issue Service Test', () => {
     expect.assertions(1)
     service.createIssue(ISSUE_CREATION_REQUEST)
     expect(Issue.create).toHaveBeenCalled()
+  })
+
+  it('find an issue by ID', () => {
+    expect.assertions(2)
+    Issue.findById.mockImplementation((id) => Promise.resolve(OPEN_ISSUE))
+    service.readIssuesById(ISSUE_ID).then((issue) => {
+      expect(issue).toEqual(OPEN_ISSUE)
+    })
+    expect(Issue.findById).toHaveBeenCalled()
+  })
+
+  it('find a not existing issue by ID', () => {
+    expect.assertions(2)
+    Issue.findById.mockImplementation((id) => Promise.reject(new Error()))
+    service.readIssuesById(INVALID_ISSUE_ID).catch(err => {
+      expect(err).toBeDefined()
+    })
+    expect(Issue.findById).toHaveBeenCalled()
   })
 })
