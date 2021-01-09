@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const issuesController = require('../controller/issues')
-const issueRequestDto = require('./dto/issueRecordRequestDto')
+const express = require('express');
+const router = express.Router();
+const issuesController = require('../controller/issues');
+const issueRequestDto = require('./dto/issueRecordRequestDto');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const issueRequestDto = require('./dto/issueRecordRequestDto')
  *          200:
  *              description: list of issues
  */
-router.get('/', issuesController.readIssue)
+router.get('/', issuesController.readIssue);
 
 /**
  * @swagger
@@ -29,7 +29,7 @@ router.get('/', issuesController.readIssue)
  *                  description: a single issue object
  *
  */
-router.get('/:id', issuesController.readIssue)
+router.get('/:id', issuesController.readIssue);
 
 /**
  * @swagger
@@ -54,6 +54,56 @@ router.get('/:id', issuesController.readIssue)
  *          400:
  *              description: problem
  */
-router.post('/', issueRequestDto, issuesController.createIssue)
+router.post('/', issueRequestDto, issuesController.createIssue);
 
-module.exports = router
+/**
+ * @swagger
+ * /issues/{id}/in-progress:
+ *      post:
+ *          summary: set issue to "in progress" state
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/in-progress', issuesController.stateChangeToInProgress);
+
+/**
+ * @swagger
+ * /issues/{id}/resolve:
+ *      post:
+ *          summary: get issue by id
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/resolve', issuesController.stateChangeToResolved);
+/**
+ * @swagger
+ * /issues/{id}/close:
+ *      post:
+ *          summary: get issue by id
+ *          parameters:
+ *              -   in: path
+ *                  name: id
+ *                  type: integer
+ *                  required: true
+ *          responses:
+ *              200:
+ *                  description: a single issue object
+ *
+ */
+router.post('/:id/close', issuesController.stateChangeToClosed);
+
+module.exports = router;

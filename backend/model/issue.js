@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const IssueSchema = new mongoose.Schema({
   title: {
@@ -8,7 +8,16 @@ const IssueSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true
+  },
+  state: {
+    type: String,
+    required: true
   }
-})
+});
 
-module.exports = mongoose.model('issue', IssueSchema)
+IssueSchema.pre('findOneAndUpdate', next => {
+  console.log('pre update hook');
+  next();
+});
+
+module.exports = mongoose.model('issue', IssueSchema);

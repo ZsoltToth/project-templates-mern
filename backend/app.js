@@ -1,45 +1,47 @@
-const express = require('express')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const logger = require('morgan')
-const winston = require('winston')
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const winston = require('winston');
 const log = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   transports: new winston.transports.Console()
-})
-const config = require('./config')
-const mongoose = require('mongoose')
+});
+const config = require('./config');
+const mongoose = require('mongoose');
 
-const { host, port, name, user, password } = config.db
-const dbConnectionString = `mongodb://${host}:${port}/${name}`
+const { host, port, name, user, password } = config.db;
+const dbConnectionString = `mongodb://${host}:${port}/${name}`;
+
 mongoose.connect(dbConnectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
   auth: {
     authSource: 'admin'
   },
   user: user,
   pass: password
 }).catch(reason => {
-  log.error({ reason: reason, connectionString: dbConnectionString })
-  process.exit(1)
-})
+  log.error({ reason: reason, connectionString: dbConnectionString });
+  process.exit(1);
+});
 
-const swaggerJsdoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
-const issuesRouter = require('./routes/issues')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const issuesRouter = require('./routes/issues');
 
-const app = express()
+const app = express();
 
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const swaggerOptions = {
   definition: {
@@ -66,12 +68,12 @@ const swaggerOptions = {
     ]
   },
   apis: ['./routes/*.js']
-}
-const swaggerSpec = swaggerJsdoc(swaggerOptions)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }))
+};
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
-app.use('/issues', issuesRouter)
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/issues', issuesRouter);
 
-module.exports = app
+module.exports = app;
