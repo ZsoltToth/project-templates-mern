@@ -69,6 +69,8 @@ router.post('/', issueRequestDto, issuesController.createIssue);
  *          responses:
  *              200:
  *                  description: a single issue object
+ *              400:
+ *                  description: error object
  *
  */
 router.put('/:id/in-progress', issuesController.stateChangeToInProgress);
@@ -86,7 +88,8 @@ router.put('/:id/in-progress', issuesController.stateChangeToInProgress);
  *          responses:
  *              200:
  *                  description: a single issue object
- *
+ *              400:
+ *                  description: error object
  */
 router.put('/:id/resolve', issuesController.stateChangeToResolved);
 /**
@@ -102,6 +105,8 @@ router.put('/:id/resolve', issuesController.stateChangeToResolved);
  *          responses:
  *              200:
  *                  description: a single issue object
+ *              400:
+ *                  description: error object
  *
  */
 router.put('/:id/close', issuesController.stateChangeToClosed);

@@ -46,23 +46,16 @@ const readIssuesById = (id) => {
 };
 
 const changeSate = (id, state) => {
-  return new Promise((resolve, reject) => {
-    readIssuesById(id)
-      .then(issue => {
-        logger.debug(`State Chagen Attempt ${issue}`);
-        if (!isStateChangeAllowed(issue.state, state)) {
-          logger.info(`Invalid State Change ${issue.state} => ${state}`);
-          reject(new Error({ msg: `Invalid State Change ${issue.state} => ${state}` }));
-          return;
-        }
-        Issue.findByIdAndUpdate(id, { state: state }, { new: true })
-          .then((docs) => resolve(docs))
-          .catch((err) => {
-            reject(err);
-          });
-      })
-      .catch((err) => reject(err));
-  });
+  return readIssuesById(id)
+    .then(issue => {
+      if (!isStateChangeAllowed(issue.state, state)) {
+        logger.info(`Invalid State Change ${issue.state} => ${state}`);
+        throw new Error({ msg: `Invalid State ohange ${issue.state} => ${state}` });
+      }
+      return issue;
+    }).then(issue => {
+      return Issue.findByIdAndUpdate(id, { state: state }, { new: true });
+    });
 };
 
 const isStateChangeAllowed = (from, to) => {
