@@ -59,7 +59,7 @@ router.post('/', issueRequestDto, issuesController.createIssue);
 /**
  * @swagger
  * /issues/{id}/in-progress:
- *      post:
+ *     put:
  *          summary: set issue to "in progress" state
  *          parameters:
  *              -   in: path
@@ -69,14 +69,16 @@ router.post('/', issueRequestDto, issuesController.createIssue);
  *          responses:
  *              200:
  *                  description: a single issue object
+ *              400:
+ *                  description: error object
  *
  */
-router.post('/:id/in-progress', issuesController.stateChangeToInProgress);
+router.put('/:id/in-progress', issuesController.stateChangeToInProgress);
 
 /**
  * @swagger
  * /issues/{id}/resolve:
- *      post:
+ *      put:
  *          summary: get issue by id
  *          parameters:
  *              -   in: path
@@ -86,13 +88,14 @@ router.post('/:id/in-progress', issuesController.stateChangeToInProgress);
  *          responses:
  *              200:
  *                  description: a single issue object
- *
+ *              400:
+ *                  description: error object
  */
-router.post('/:id/resolve', issuesController.stateChangeToResolved);
+router.put('/:id/resolve', issuesController.stateChangeToResolved);
 /**
  * @swagger
  * /issues/{id}/close:
- *      post:
+ *      put:
  *          summary: get issue by id
  *          parameters:
  *              -   in: path
@@ -102,8 +105,10 @@ router.post('/:id/resolve', issuesController.stateChangeToResolved);
  *          responses:
  *              200:
  *                  description: a single issue object
+ *              400:
+ *                  description: error object
  *
  */
-router.post('/:id/close', issuesController.stateChangeToClosed);
+router.put('/:id/close', issuesController.stateChangeToClosed);
 
 module.exports = router;
