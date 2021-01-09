@@ -13,6 +13,7 @@ Scripts
 
 Pre Commit Hooks
  - [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) message checking
+   - in the commit message use only lower case characters!
  - code quality check (style & test scripts)
 
 Testing
