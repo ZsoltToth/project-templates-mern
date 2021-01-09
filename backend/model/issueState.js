@@ -3,4 +3,4 @@ module.exports = {
   CLOSED: 'closed',
   RESOLVED: 'resolved',
   IN_PROGRESS: 'in progress'
-}
+};

@@ -1,4 +1,4 @@
-const environment = ['dev', 'test', 'prod'].includes(process.env.NODE_ENV) ? process.env.NODE_ENV : 'dev'
+const environment = ['dev', 'test', 'prod'].includes(process.env.NODE_ENV) ? process.env.NODE_ENV : 'dev';
 
 const dev = {
   env: 'development',
@@ -12,13 +12,13 @@ const dev = {
     user: 'mern',
     password: 'secret'
   }
-}
+};
 
-const prod = { ...dev, env: 'production' }
-const test = { ...dev, env: 'test' }
+const prod = { ...dev, env: 'production' };
+const test = { ...dev, env: 'test' };
 
 const config = {
   dev, prod, test
-}
+};
 
-module.exports = config[environment]
+module.exports = config[environment];

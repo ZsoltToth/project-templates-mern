@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const issuesController = require('../controller/issues')
-const issueRequestDto = require('./dto/issueRecordRequestDto')
+const express = require('express');
+const router = express.Router();
+const issuesController = require('../controller/issues');
+const issueRequestDto = require('./dto/issueRecordRequestDto');
 
 /**
  * @swagger
@@ -12,7 +12,7 @@ const issueRequestDto = require('./dto/issueRecordRequestDto')
  *          200:
  *              description: list of issues
  */
-router.get('/', issuesController.readIssue)
+router.get('/', issuesController.readIssue);
 
 /**
  * @swagger
@@ -29,7 +29,7 @@ router.get('/', issuesController.readIssue)
  *                  description: a single issue object
  *
  */
-router.get('/:id', issuesController.readIssue)
+router.get('/:id', issuesController.readIssue);
 
 /**
  * @swagger
@@ -54,7 +54,7 @@ router.get('/:id', issuesController.readIssue)
  *          400:
  *              description: problem
  */
-router.post('/', issueRequestDto, issuesController.createIssue)
+router.post('/', issueRequestDto, issuesController.createIssue);
 
 /**
  * @swagger
@@ -71,7 +71,7 @@ router.post('/', issueRequestDto, issuesController.createIssue)
  *                  description: a single issue object
  *
  */
-router.post('/:id/in-progress', issuesController.stateChangeToInProgress)
+router.post('/:id/in-progress', issuesController.stateChangeToInProgress);
 
 /**
  * @swagger
@@ -88,7 +88,7 @@ router.post('/:id/in-progress', issuesController.stateChangeToInProgress)
  *                  description: a single issue object
  *
  */
-router.post('/:id/resolve', issuesController.stateChangeToResolved)
+router.post('/:id/resolve', issuesController.stateChangeToResolved);
 /**
  * @swagger
  * /issues/{id}/close:
@@ -104,6 +104,6 @@ router.post('/:id/resolve', issuesController.stateChangeToResolved)
  *                  description: a single issue object
  *
  */
-router.post('/:id/close', issuesController.stateChangeToClosed)
+router.post('/:id/close', issuesController.stateChangeToClosed);
 
-module.exports = router
+module.exports = router;

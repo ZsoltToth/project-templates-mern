@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const IssueSchema = new mongoose.Schema({
   title: {
@@ -13,11 +13,11 @@ const IssueSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-})
+});
 
 IssueSchema.pre('findOneAndUpdate', next => {
-  console.log('pre update hook')
-  next()
-})
+  console.log('pre update hook');
+  next();
+});
 
-module.exports = mongoose.model('issue', IssueSchema)
+module.exports = mongoose.model('issue', IssueSchema);

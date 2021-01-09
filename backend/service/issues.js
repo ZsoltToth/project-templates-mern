@@ -1,6 +1,6 @@
-const Issue = require('../model/issue')
-const issueState = require('../model/issueState')
-const winston = require('winston')
+const Issue = require('../model/issue');
+const issueState = require('../model/issueState');
+const winston = require('winston');
 
 const logger = winston.createLogger({
   level: 'info',
@@ -12,75 +12,75 @@ const logger = winston.createLogger({
     }),
     new winston.transports.Console()
   ]
-})
+});
 
 const createIssue = (issue) => {
   return new Promise((resolve, reject) => {
     Issue.create({ ...issue, state: issueState.OPEN })
       .then((doc) => {
-        resolve(doc)
+        resolve(doc);
       })
-      .catch((err) => { reject(err) })
-  })
-}
+      .catch((err) => { reject(err); });
+  });
+};
 
 const readIssues = () => {
   return new Promise((resolve, reject) => {
     Issue.find()
-      .then((documents) => { resolve(documents) })
-      .catch((err) => { reject(err) })
-  })
-}
+      .then((documents) => { resolve(documents); })
+      .catch((err) => { reject(err); });
+  });
+};
 
 const readIssuesById = (id) => {
   return new Promise((resolve, reject) => {
     Issue.findById(id)
       .then((documents) => {
-        resolve(documents)
+        resolve(documents);
       })
       .catch((err) => {
-        logger.info(`Issue Not Found with id: ${id}`)
-        reject(err)
-      })
-  })
-}
+        logger.info(`Issue Not Found with id: ${id}`);
+        reject(err);
+      });
+  });
+};
 
 const changeSate = (id, state) => {
   return new Promise((resolve, reject) => {
     readIssuesById(id)
       .then(issue => {
-        logger.debug(`State Chagen Attempt ${issue}`)
+        logger.debug(`State Chagen Attempt ${issue}`);
         if (!isStateChangeAllowed(issue.state, state)) {
-          logger.info(`Invalid State Change ${issue.state} => ${state}`)
-          reject(new Error({ msg: `Invalid State Change ${issue.state} => ${state}` }))
-          return
+          logger.info(`Invalid State Change ${issue.state} => ${state}`);
+          reject(new Error({ msg: `Invalid State Change ${issue.state} => ${state}` }));
+          return;
         }
         Issue.findByIdAndUpdate(id, { state: state }, { new: true })
           .then((docs) => resolve(docs))
           .catch((err) => {
-            reject(err)
-          })
+            reject(err);
+          });
       })
-      .catch((err) => reject(err))
-  })
-}
+      .catch((err) => reject(err));
+  });
+};
 
 const isStateChangeAllowed = (from, to) => {
-  if (from === issueState.OPEN && to === issueState.IN_PROGRESS) return true
-  if (from === issueState.IN_PROGRESS && to === issueState.RESOLVED) return true
-  if (from === issueState.RESOLVED && [issueState.IN_PROGRESS, issueState.CLOSED].includes(to)) return true
-  return false
-}
+  if (from === issueState.OPEN && to === issueState.IN_PROGRESS) return true;
+  if (from === issueState.IN_PROGRESS && to === issueState.RESOLVED) return true;
+  if (from === issueState.RESOLVED && [issueState.IN_PROGRESS, issueState.CLOSED].includes(to)) return true;
+  return false;
+};
 
 const changeStateToInProgress = (id) => {
-  return changeSate(id, issueState.IN_PROGRESS)
-}
+  return changeSate(id, issueState.IN_PROGRESS);
+};
 const changeStateToResolved = (id) => {
-  return changeSate(id, issueState.RESOLVED)
-}
+  return changeSate(id, issueState.RESOLVED);
+};
 const changeStateToClosed = (id) => {
-  return changeSate(id, issueState.CLOSED)
-}
+  return changeSate(id, issueState.CLOSED);
+};
 
 module.exports = {
   createIssue: createIssue,
@@ -89,4 +89,4 @@ module.exports = {
   changeStateToInProgress: changeStateToInProgress,
   changeStateToResolved: changeStateToResolved,
   changeStateToClosed: changeStateToClosed
-}
+};
