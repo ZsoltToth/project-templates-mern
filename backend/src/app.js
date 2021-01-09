@@ -31,8 +31,6 @@ mongoose.connect(dbConnectionString, {
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const indexRouter = require('./routes');
-const usersRouter = require('./routes/users');
 const issuesRouter = require('./routes/issues');
 
 const app = express();
@@ -72,8 +70,6 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/issues', issuesRouter);
 
 module.exports = app;
