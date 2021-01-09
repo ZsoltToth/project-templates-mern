@@ -31,7 +31,7 @@ mongoose.connect(dbConnectionString, {
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes');
 const usersRouter = require('./routes/users');
 const issuesRouter = require('./routes/issues');
 
@@ -67,7 +67,7 @@ const swaggerOptions = {
       }
     ]
   },
-  apis: ['./routes/*.js']
+  apis: [path.join(__dirname, '/routes/*.js')]
 };
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
