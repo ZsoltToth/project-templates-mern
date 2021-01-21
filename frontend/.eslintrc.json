@@ -3,7 +3,8 @@
         "browser": true,
         "commonjs": true,
         "node": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "parser": "babel-eslint",
     "extends": [
@@ -18,7 +19,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "eslint-plugin-react"
     ],
     "rules": {
     },
