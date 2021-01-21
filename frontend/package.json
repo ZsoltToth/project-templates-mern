@@ -7,10 +7,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
+    "test:coverage": "jest --coverage",
+    "test:quality" : "npm run test:coverage -- --coverageThreshold='{\"global\":{\"lines\":60}}'",
     "eject": "react-scripts eject",
     "style": "eslint .",
     "style:fix": "npm run style -- --fix",
-    "validate": "style & npx jest",
     "clean": "rimraf node_modules"
   },
   "dependencies": {
@@ -51,7 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run validate"
+      "pre-commit": "npm run style && npm run test"
     }
   }
 }
