@@ -9,6 +9,7 @@ const log = winston.createLogger({
   transports: new winston.transports.Console()
 });
 const config = require('./config');
+log.info({ config: config });
 const mongoose = require('mongoose');
 
 const { host, port, name, user, password } = config.db;
