@@ -1,4 +1,4 @@
-import {EventEmitter} from 'events'
+import {EventEmitter} from 'events';
 import dispatcher from "../dispatcher/Dispatcher";
 import {refresh} from '../dispatcher/ComplexNumberActionConstants';
 
@@ -26,4 +26,4 @@ dispatcher.register(({action,payload})=>{
     if(action !== refresh ) return;
     store._complexNumbers = payload;
     store.emitChange();
-})
+});

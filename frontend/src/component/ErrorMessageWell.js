@@ -1,11 +1,11 @@
 import React from 'react';
-import {default as store} from '../store/ErrorMessageStore'
+import {default as store} from '../store/ErrorMessageStore';
 
 class ErrorMessageWell extends React.Component{
 
     constructor() {
         super();
-        this.state = { errorMsg : ""}
+        this.state = { errorMsg : ""};
         this._errorMsgChange = this._errorMsgChange.bind(this);
     }
 

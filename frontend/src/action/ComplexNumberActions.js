@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dispatcher from '../dispatcher/Dispatcher';
-import * as actionConstants from '../dispatcher/ComplexNumberActionConstants'
+import * as actionConstants from '../dispatcher/ComplexNumberActionConstants';
 
 export const recordComplexNumber = ({real,imag}) =>{
     axios.post('/complex-number/record',
@@ -19,7 +19,7 @@ export const recordComplexNumber = ({real,imag}) =>{
             });
             fetchComplexNumbers();
         });
-}
+};
 
 export const fetchComplexNumbers = () =>{
 
@@ -28,5 +28,5 @@ export const fetchComplexNumbers = () =>{
             action : actionConstants.refresh,
             payload: resp.data
         });
-    })
-}
+    });
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import {default as store} from '../store/ComplexNumberStore'
+import {default as store} from '../store/ComplexNumberStore';
 import ComplexNumberListItem from "./ComplexNumberListItem";
 
 class ComplexNumberList extends React.Component{

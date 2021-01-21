@@ -2,7 +2,7 @@ jest.dontMock('../ComplexNumberActions');
 import  * as actions from '../ComplexNumberActions';
 jest.mock('axios');
 import axios from 'axios';
-jest.mock('../../dispatcher/Dispatcher')
+jest.mock('../../dispatcher/Dispatcher');
 import dispatcher from "../../dispatcher/Dispatcher";
 
 describe('Tests for ComplexNumberAction', ()=>{
@@ -40,4 +40,4 @@ describe('Tests for ComplexNumberAction', ()=>{
         expect(dispatcher.dispatch).toHaveBeenCalledTimes(1);
     });
 
-})
+});
