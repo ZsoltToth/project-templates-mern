@@ -23,6 +23,7 @@
         "eslint-plugin-react"
     ],
     "rules": {
+        "semi": [2, "always"]
     },
     "overrides": [
         {

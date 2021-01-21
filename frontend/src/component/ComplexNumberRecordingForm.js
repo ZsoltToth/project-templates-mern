@@ -33,4 +33,4 @@ class ComplexNumberRecordingForm extends React.Component{
     }
 }
 
-export default ComplexNumberRecordingForm
+export default ComplexNumberRecordingForm;
