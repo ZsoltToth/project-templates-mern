@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  db:
+    image: 'mongo:4.4'
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mern
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - '127.0.0.1:27017:27017'
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_PORT: 3000
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      NODE_ENV: test
+      APP_PORT: 3000
+      DB_HOST: db
+      DB_PORT: 27017
+      DB_NAME: issues
+      DB_USER: mern
+      DB_PASSWORD: secret
+    depends_on:
+      - db

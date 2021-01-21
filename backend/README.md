@@ -20,3 +20,16 @@ Testing
  - Put tests next to the tested file. For example, service.js and service.test.js
  - Jest is used for testing
  - [FIRST](https://medium.com/@tasdikrahman/f-i-r-s-t-principles-of-testing-1a497acda8d6) Principles should be considered
+
+Run from IDE (WebStorm)
+ - Start MongoDB with ./docker/start-mongo-docker.sh
+ - Run npm run start for starting the server with default configurations (works with docker)
+ - Run npm run start:dev for development mode (restart if source is modified)
+ - You can configure PORT and DB Connection via environment variables see config.js
+ - dev, test and prod settings are supported, (dev is default)
+
+Run with Docker
+ - Use [DockStation](https://dockstation.io/)
+ - docker-compose.yml starts the project with default settings
+   - Port 3000
+   - __corresponding environment and build arguments should match!__
