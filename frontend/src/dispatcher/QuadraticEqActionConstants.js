@@ -1,3 +1,3 @@
 module.exports = {
-    fetchTasks : 'FETCH_ALL_QUADRATIC_EQUATION_TASKS'
+    refreshTasks: 'REFRESH_QUADRATIC_EQUATION_TASKS'
 };

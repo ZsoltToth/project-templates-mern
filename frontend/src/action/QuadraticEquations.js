@@ -1,6 +1,6 @@
 import axios from 'axios';
-// import dispatcher from '../dispatcher/Dispatcher';
-// import * as actionConstants from '../dispatcher/QuadraticEqActionConstants';
+import dispatcher from '../dispatcher/Dispatcher';
+import * as actionConstants from '../dispatcher/QuadraticEqActionConstants';
 import winston from 'winston';
 
 const logger = winston.createLogger({
@@ -14,7 +14,10 @@ const logger = winston.createLogger({
 const _fetchAllTasks = () => {
    axios.get('/issues')
        .then(resp => {
-            logger.info(resp);
+           dispatcher.dispatch({
+               action: actionConstants.refreshTasks,
+               payload: resp.data
+           });
        })
        .catch(err => {
            logger.error(err);

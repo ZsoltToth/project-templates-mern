@@ -1,50 +1,24 @@
 import React from 'react';
+import store from '../../store/QuadraticEquationTasksStore';
 
 class QuadraticEqTaskList extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {qeTasks : [
-                {
-                    "_id": "600d4a9e2e0f9e001bd9b796",
-                    "title": "Issue 1",
-                    "description": "string",
-                    "state": "open",
-                    "__v": 0
-                },
-                {
-                    "_id": "600d4b0b2e0f9e001bd9b797",
-                    "title": "Issue 2",
-                    "description": "string",
-                    "state": "open",
-                    "__v": 0
-                }
-            ]};
+        this.state = {qeTasks : []};
         this._updateStateFromStore = this._updateStateFromStore.bind(this);
     }
 
     componentDidMount() {
+        store.addChangeListener(this._updateStateFromStore);
+    }
+
+    componentWillUnmount() {
+        store.removeChangeListener(this._updateStateFromStore);
     }
 
     _updateStateFromStore(){
-        this.setState({
-            qeTasks: [
-                {
-                    "_id": "600d4a9e2e0f9e001bd9b796",
-                    "title": "Issue 1",
-                    "description": "string",
-                    "state": "open",
-                    "__v": 0
-                },
-                {
-                    "_id": "600d4b0b2e0f9e001bd9b797",
-                    "title": "Issue 2",
-                    "description": "string",
-                    "state": "open",
-                    "__v": 0
-                }
-            ]
-        });
+        this.setState({qeTasks: store._qeTasks});
     }
 
     render() {
