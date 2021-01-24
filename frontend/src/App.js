@@ -2,8 +2,8 @@ import React from 'react';
 import './App.scss';
 import ComplexNumberRecordingForm from "./component/ComplexNumberRecordingForm";
 import ComplexNumberList from "./component/ComplexNumberList";
-import QuadraticEqTaskList from "./component/qe/QuadraticEqTaskList";
-import * as quadraticActions from './action/QuadraticEquations';
+import IssuesList from "./component/qe/IssuesList";
+import * as quadraticActions from './action/Issues';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
             <div className={"col-md-6"}>
                 <ComplexNumberRecordingForm/>
                 <ComplexNumberList/>
-                <QuadraticEqTaskList/>
+                <IssuesList/>
                 <button onClick={()=>{quadraticActions.fetchAllTasks();}}>Click</button>
             </div>
             <div className={"col-md-3"}></div>

@@ -1,5 +1,5 @@
-jest.dontMock('./QuadraticEquations');
-import  * as actions from './QuadraticEquations';
+jest.dontMock('./Issues');
+import  * as actions from './Issues';
 jest.mock('axios');
 import axios from 'axios';
 jest.mock('../dispatcher/Dispatcher');

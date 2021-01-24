@@ -1,7 +1,7 @@
 import React from 'react';
 import store from '../../store/QuadraticEquationTasksStore';
 
-class QuadraticEqTaskList extends React.Component{
+class IssuesList extends React.Component{
 
     constructor(props) {
         super(props);
@@ -55,4 +55,4 @@ class QuadraticEqTaskList extends React.Component{
     }
 }
 
-export default QuadraticEqTaskList;
+export default IssuesList;
