@@ -1,11 +1,14 @@
+import {it} from "@jest/globals";
+
 jest.dontMock('./Issues');
 import  * as actions from './Issues';
+import  * as actionsConstants from '../dispatcher/IssueActionConstants';
 jest.mock('axios');
 import axios from 'axios';
 jest.mock('../dispatcher/Dispatcher');
 import dispatcher from "../dispatcher/Dispatcher";
 
-describe('', () => {
+describe('Testing Issues Actions', () => {
 
     const issues = [
         {
@@ -28,15 +31,28 @@ describe('', () => {
         jest.clearAllMocks();
     });
 
-    it('', () => {
+    it('fetches issues and dispatch them', async () => {
         // given
-        axios.get.mockReturnValue( Promise.resolve(issues));
-        dispatcher.dispatch();
+        axios.get.mockReturnValue( Promise.resolve({data: issues}));
+        const expectedDispatchedEvent = {
+            action: actionsConstants.refreshTasks,
+            payload: issues
+        };
+        // when
+        await actions.fetchAllTasks();
+        // then
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(dispatcher.dispatch).toBeCalledTimes(1);
+        expect(dispatcher.dispatch).toHaveBeenCalledWith(expectedDispatchedEvent);
+    });
+
+    it('gets error during fetching issues', () => {
+        // given
+        axios.get.mockReturnValue( Promise.reject());
         // when
         actions.fetchAllTasks();
         // then
-        expect(axios.get).toHaveBeenCalled();
-        expect(dispatcher.dispatch).toHaveBeenCalled();
-
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(dispatcher.dispatch).toHaveBeenCalledTimes(0);
     });
 });

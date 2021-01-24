@@ -1,8 +1,8 @@
 import {EventEmitter} from 'events';
 import dispatcher from "../dispatcher/Dispatcher";
-import * as actions from '../dispatcher/QuadraticEqActionConstants';
+import * as actions from '../dispatcher/IssueActionConstants';
 
-class QuadraticEquationTasksStore extends EventEmitter{
+class IssueStore extends EventEmitter{
 
     _qeTasks = [];
 
@@ -19,7 +19,7 @@ class QuadraticEquationTasksStore extends EventEmitter{
     }
 }
 
-const store = new QuadraticEquationTasksStore();
+const store = new IssueStore();
 export default store;
 
 dispatcher.register(({action,payload})=>{

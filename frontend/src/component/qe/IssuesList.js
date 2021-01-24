@@ -1,5 +1,5 @@
 import React from 'react';
-import store from '../../store/QuadraticEquationTasksStore';
+import store from '../../store/IssueStore';
 
 class IssuesList extends React.Component{
 
