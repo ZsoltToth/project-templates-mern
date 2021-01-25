@@ -1,14 +1,14 @@
 import axios from 'axios';
 import dispatcher from '../dispatcher/Dispatcher';
 import * as actionConstants from '../dispatcher/IssueActionConstants';
+import * as notificationActions from '../dispatcher/NotificatonActionConstants';
 import winston from 'winston';
-import BrowserConsole from "winston-transport-browserconsole"; 'winston-transport-browserconsole';
 
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.simple(),
     transports: [
-        new BrowserConsole()
+        new winston.transports.Console()
     ]
 });
 
@@ -29,10 +29,18 @@ const _recordTask = ({title, description}) => {
     axios.post('/issues', {
         title: title,
         description: description})
-        .then(resp =>{
-           logger.info(resp);
+        .then(() =>{
+            dispatcher.dispatch({
+                action: notificationActions.showSuccess,
+                payload: `Issue recorded`
+            });
         })
-        .catch(err => logger.error(err));
+        .catch(err => {
+            dispatcher.dispatch({
+                action: notificationActions.showFailure,
+                payload: err
+            });
+        });
 };
 
 export const fetchAllTasks = _fetchAllTasks;
