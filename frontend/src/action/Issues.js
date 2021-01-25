@@ -2,12 +2,13 @@ import axios from 'axios';
 import dispatcher from '../dispatcher/Dispatcher';
 import * as actionConstants from '../dispatcher/IssueActionConstants';
 import winston from 'winston';
+import BrowserConsole from "winston-transport-browserconsole"; 'winston-transport-browserconsole';
 
 const logger = winston.createLogger({
     level: 'info',
-    format: winston.format.json(),
+    format: winston.format.simple(),
     transports: [
-        new winston.transports.Console()
+        new BrowserConsole()
     ]
 });
 
@@ -24,5 +25,16 @@ const _fetchAllTasks = () => {
        });
 };
 
+const _recordTask = ({title, description}) => {
+    axios.post('/issues', {
+        title: title,
+        description: description})
+        .then(resp =>{
+           logger.info(resp);
+        })
+        .catch(err => logger.error(err));
+};
+
 export const fetchAllTasks = _fetchAllTasks;
+export const recordTask = _recordTask;
 
