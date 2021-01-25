@@ -1,4 +1,4 @@
-import {it} from "@jest/globals";
+import {describe, it} from "@jest/globals";
 
 jest.dontMock('./Issues');
 import  * as actions from './Issues';
@@ -46,13 +46,32 @@ describe('Testing Issues Actions', () => {
         expect(dispatcher.dispatch).toHaveBeenCalledWith(expectedDispatchedEvent);
     });
 
-    it('gets error during fetching issues', () => {
+    it('gets error during fetching issues', async () => {
         // given
-        axios.get.mockReturnValue( Promise.reject());
+        axios.get.mockReturnValue(Promise.reject());
         // when
-        actions.fetchAllTasks();
+        await actions.fetchAllTasks();
         // then
         expect(axios.get).toHaveBeenCalledTimes(1);
         expect(dispatcher.dispatch).toHaveBeenCalledTimes(0);
+    });
+
+    it('creates a new issue successfully', async () => {
+        // given
+        axios.post.mockReturnValue(Promise.resolve());
+        // when
+        await actions.recordTask(issues[0]);
+        // then
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(dispatcher.dispatch).toHaveBeenCalledTimes(1);
+    });
+
+    it('creates a new issue unsuccessfully', async () => {
+        // given
+        axios.post.mockReturnValue(Promise.reject(new Error()));
+        // when
+        await actions.recordTask(issues[0]);
+        // then
+        expect(axios.post).toHaveBeenCalledTimes(1);
     });
 });
