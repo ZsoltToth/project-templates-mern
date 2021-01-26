@@ -25,9 +25,10 @@
     "rules": {
         "semi": [2, "always"]
     },
+    "ignorePatterns": ["**/node_modules/**", "**/public/**", "**/build/**"],
     "overrides": [
         {
-            "files": "**/node_modules/**",
+            "files": ["**/node_modules/**","**/build/**", "**/public/**"],
             "rules": {
                 "strict": "off"
             }

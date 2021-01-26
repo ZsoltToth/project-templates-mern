@@ -1,7 +1,7 @@
 const environment = ['dev', 'test', 'prod'].includes(process.env.NODE_ENV) ? process.env.NODE_ENV : 'dev';
 
 const dev = {
-  env: 'development',
+  env: 'dev',
   app: {
     port: 3000
   },
@@ -27,7 +27,7 @@ const test = {
     password: (process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : dev.db.password)
   }
 };
-const prod = { ...test, env: 'production' };
+const prod = { ...test, env: 'prod' };
 
 const config = {
   dev, prod, test
