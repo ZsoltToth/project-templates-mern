@@ -18,9 +18,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 12
-    - name: Change Working Directory
-      run: cd frontend
     - name: Install
-      run: npm install
+      run: npm install --prefix ./frontend
     - name: Quality Gate
-      run: npm run test:quality
+      run: npm run test:quality --prefix ./frontend
