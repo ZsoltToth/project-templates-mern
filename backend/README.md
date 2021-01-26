@@ -33,3 +33,7 @@ Run with Docker
  - docker-compose.yml starts the project with default settings
    - Port 3000
    - __corresponding environment and build arguments should match!__
+   
+Build for Production
+ - Run build-frontend.sh script to generate public directory.
+ - Run docker-compsoe-prod.yml to start the backend in production mode.

@@ -13,5 +13,14 @@ module.exports = {
   },
   rules: {
     semi: [2, 'always']
-  }
+  },
+  ignorePatterns: ['**/node_modules/**', '**/public/**', '**/build/**'],
+  overrides: [
+    {
+      files: ['**/node_modules/**', '**/public/**', '**/build/**'],
+      rules: {
+        strict: 'off'
+      }
+    }
+  ]
 };
