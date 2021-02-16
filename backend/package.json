@@ -8,7 +8,7 @@
     "start": "node src/bin/www",
     "start:dev": "nodemon start",
     "test": "jest",
-    "test:coverage" : "npm run test -- --coverage",
+    "test:coverage": "npm run test -- --coverage",
     "test:quality": "npm run style && npm run test:coverage -- --coverageThreshold='{\"global\":{\"lines\":60}}'"
   },
   "devDependencies": {

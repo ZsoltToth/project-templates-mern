@@ -24,5 +24,7 @@ services:
       DB_NAME: issues
       DB_USER: mern
       DB_PASSWORD: secret
+    volumes:
+    - './public:/home/node/app/public'
     depends_on:
       - db
