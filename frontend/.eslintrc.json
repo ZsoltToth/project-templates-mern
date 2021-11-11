@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "cypress/globals": true
     },
     "extends": [
         "react-app",
@@ -19,10 +20,21 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "cypress"
     ],
     "rules": {
         "semi": ["error", "always"],
         "no-use-before-define": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.spec.js"],
+            "rules": {
+                "no-unused-expressions": "off",
+                "jest/valid-expect" : "off",
+                "jest/valid-expect-in-promise": "off"
+            }
+        }
+    ]
 }
