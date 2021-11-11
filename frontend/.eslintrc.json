@@ -29,7 +29,7 @@
     },
     "overrides": [
         {
-            "files": ["*.spec.js"],
+            "files": ["*.spec.js", "*.spec.tsx"],
             "rules": {
                 "no-unused-expressions": "off",
                 "jest/valid-expect" : "off",
