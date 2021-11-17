@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "style": "eslint .",
+    "style:fix": "npm run style -- --fix"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",

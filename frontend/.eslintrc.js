@@ -30,6 +30,10 @@ module.exports = {
       version: '17.0.2'
     }
   },
+  ignorePatterns: [
+    'node_modules',
+    'build'
+  ],
   overrides: [
     {
       files: ['*.spec.js', '*.spec.tsx'],
