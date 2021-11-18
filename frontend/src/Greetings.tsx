@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Greetings:React.FC = () => {
+interface GreetingsProps {
+  name: string
+}
+
+const Greetings:React.FC<GreetingsProps> = (props: GreetingsProps) => {
   return (
-        <div>Hello World</div>
+        <div>Hello {props.name}</div>
   );
 };
 
