@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormControl, TextField } from '@material-ui/core';
+import { recordIssue } from '../action/IssueActions';
 
 const IssueRecordingForm:React.FC = () => {
   const [title, setTitle] = useState('');
@@ -29,7 +30,7 @@ const IssueRecordingForm:React.FC = () => {
           />
         <Button
             variant={'contained'}
-            onClick={() => { alert(JSON.stringify({ title: title, description: description })); }}
+            onClick={() => { recordIssue({ title: title, description: description }); }}
         >Submit</Button>
       </FormControl>
   );
