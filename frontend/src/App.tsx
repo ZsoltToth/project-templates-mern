@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Greetings from './Greetings';
-import Counter from './Counter';
-import IssueRecordingForm from './IssueRecordingForm';
+import Greetings from './component/Greetings';
+import Counter from './component/Counter';
+import IssueRecordingForm from './component/IssueRecordingForm';
 
 function App () {
   return (
