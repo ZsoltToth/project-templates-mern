@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Greetings from './Greetings';
 import Counter from './Counter';
+import IssueRecordingForm from './IssueRecordingForm';
 
 function App () {
   return (
@@ -10,6 +11,7 @@ function App () {
       <header className="App-header">
         <Greetings name={'React'}/>
         <Counter/>
+        <IssueRecordingForm/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
