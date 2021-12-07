@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { fetchIssues, issue } from '../action/IssueActions';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
+import { fetchAll } from '../store/issuesReducer';
+
 const IssueTable:React.FC = () => {
-  const [issues, setIssues] = useState<issue[]>([]);
+  const appDispatch = useDispatch<AppDispatch>();
+  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+  // const [issues, setIssues] = useState<issue[]>([]);
+  const issues = useAppSelector((state) => state.issuesReducer.issues);
 
   useEffect(() => {
-    fetchIssues().then((issues) => setIssues(issues));
-  });
+    fetchIssues().then(issues => appDispatch(fetchAll(issues)));
+    // fetchIssues().then((issues) => setIssues(issues));
+  }, []);
 
   return (
       <Table>

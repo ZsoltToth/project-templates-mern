@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/store';
+import { fetchAll } from '../store/issuesReducer';
 
 type Issue = {
   _id: string,
@@ -19,22 +22,12 @@ export const recordIssue = async ({ title, description } : {title: string, descr
   }
 };
 
-export const fetchIssues = async () : Promise<Issue[]> => {
-  console.log('hello');
-  return [
-    {
-      _id: '619f64a8ce72c4001416daef',
-      title: 'title',
-      description: 'desc',
-      state: 'open',
-      __v: 0
-    },
-    {
-      _id: '619f64efce72c4001416daf2',
-      title: 'title',
-      description: 'desc',
-      state: 'open',
-      __v: 0
-    }
-  ];
+export const fetchIssues = async () : Promise<issue[]> => {
+  const resp = await axios.get('/issues');
+  if (resp.status === 200) {
+    console.log({ data: resp.data });
+  } else {
+    console.error({ error: resp.data });
+  }
+  return resp.data;
 };
