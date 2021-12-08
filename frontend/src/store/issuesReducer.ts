@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { issue } from '../action/IssueActions';
+import { issue } from '../types/Issue';
 
 const emptyIssues:issue[] = [];
 

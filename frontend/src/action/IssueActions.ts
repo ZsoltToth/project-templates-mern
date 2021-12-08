@@ -1,17 +1,5 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store/store';
-import { fetchAll } from '../store/issuesReducer';
-
-type Issue = {
-  _id: string,
-  title: string,
-  description: string,
-  state: string,
-  __v: number
-};
-
-export type issue = Issue;
+import { issue } from '../types/Issue';
 
 export const recordIssue = async ({ title, description } : {title: string, description: string}) => {
   const resp = await axios.post('/issues', { title: title, description: description });

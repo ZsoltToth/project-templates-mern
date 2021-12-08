@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { fetchIssues, issue } from '../action/IssueActions';
+import React, { useEffect } from 'react';
+import { fetchIssues } from '../action/IssueActions';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
