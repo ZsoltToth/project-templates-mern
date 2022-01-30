@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import Greetings from '../component/Greetings';
 import Counter from '../component/Counter';
-import IssueRecordingForm from '../component/IssueRecordingForm';
-import IssueTable from '../component/IssueTable';
+import IssueRecordingForm from './IssueRecordingForm';
+import IssueTable from './IssueTable';
 import logo from '../logo.svg';
 
 const LandingPage: FunctionComponent = () => {

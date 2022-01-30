@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import { AppBar, Toolbar } from '@material-ui/core';
 
 const Footer: FunctionComponent = () => {
   return (
     <>
-      <p>NavBar</p>
+      Footer
     </>
   );
 };

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar: FunctionComponent = () => {
   return (
-    <AppBar>
+    <AppBar variant={'outlined'} elevation={0} position={'static'}>
       <Toolbar>
         <Button variant={'outlined'}><Link to={'/'}><Home/></Link></Button>
         <Button variant={'outlined'}><Link to={'/issues'}>Lists</Link></Button>
