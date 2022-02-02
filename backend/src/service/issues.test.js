@@ -51,11 +51,14 @@ describe('Issue Service Test', () => {
     expect(Issue.create).toHaveBeenCalled();
   });
 
-  it('Test Create Issue with Error', () => {
+  it('Test Create Issue with Error', async () => {
     Issue.create.mockImplementation(() => Promise.reject(new Error()));
     expect.assertions(1);
-    service.createIssue(ISSUE_CREATION_REQUEST);
-    expect(Issue.create).toHaveBeenCalled();
+    try {
+      await service.createIssue(ISSUE_CREATION_REQUEST);
+    } catch (e) {
+      expect(Issue.create).toHaveBeenCalled();
+    }
   });
 
   it('reads all issues', () => {
