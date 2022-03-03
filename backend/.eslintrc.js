@@ -12,8 +12,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    semi: [2, 'always'],
-    indent: ['error', 2]
+    semi: [2, 'always']
   },
   ignorePatterns: ['**/node_modules/**', '**/public/**', '**/build/**'],
   overrides: [
