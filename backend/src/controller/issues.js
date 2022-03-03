@@ -1,18 +1,5 @@
 const { validationResult } = require('express-validator');
 const service = require('../service/issues');
-const winston = require('winston');
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.File({
-      level: 'info',
-      filename: 'logs/controller.log'
-    }),
-    new winston.transports.Console()
-  ]
-});
 
 exports.createIssue = (req, res, next) => {
   if (!validationResult(req).isEmpty()) {
@@ -37,19 +24,18 @@ exports.readIssue = (req, res, next) => {
 exports.stateChangeToInProgress = (req, res, next) => {
   service.changeStateToInProgress(req.params.id)
     .then(issues => res.send(issues))
-    .catch(err => res.status(400).send({ error: err }));
+    .catch(err => res.status(400).send({ error: err.message }));
 };
 exports.stateChangeToResolved = (req, res, next) => {
   service.changeStateToResolved(req.params.id)
     .then(issues => res.send(issues))
-    .catch(err => res.status(400).send({ error: err }));
+    .catch(err => res.status(400).send({ error: err.message }));
 };
 
 exports.stateChangeToClosed = (req, res, next) => {
   service.changeStateToClosed(req.params.id)
     .then(issues => res.send(issues))
-    .catch(err => {
-      logger.error({ err: err });
-      res.status(400).send({ error: err });
+    .catch(error => {
+      res.status(400).send({ error: error.message });
     });
 };

@@ -16,19 +16,28 @@ const logger = winston.createLogger({
 
 const createIssue = (issue) => {
   return new Promise((resolve, reject) => {
-    Issue.create({ ...issue, state: issueState.OPEN })
+    Issue.create({
+      ...issue,
+      state: issueState.OPEN
+    })
       .then((doc) => {
         resolve(doc);
       })
-      .catch((err) => { reject(err); });
+      .catch((err) => {
+        reject(err);
+      });
   });
 };
 
 const readIssues = () => {
   return new Promise((resolve, reject) => {
     Issue.find()
-      .then((documents) => { resolve(documents); })
-      .catch((err) => { reject(err); });
+      .then((documents) => {
+        resolve(documents);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };
 
@@ -46,16 +55,27 @@ const readIssuesById = (id) => {
 };
 
 const changeSate = (id, state) => {
-  return readIssuesById(id)
-    .then(issue => {
-      if (!isStateChangeAllowed(issue.state, state)) {
-        logger.info(`Invalid State Change ${issue.state} => ${state}`);
-        throw new Error({ msg: `Invalid State ohange ${issue.state} => ${state}` });
-      }
-      return issue;
-    }).then(issue => {
-      return Issue.findByIdAndUpdate(id, { state: state }, { new: true });
-    });
+  return new Promise((resolve, reject) => {
+    readIssuesById(id)
+      .then(issue => {
+        logger.info(`${issue} <-----------`);
+        if (!isStateChangeAllowed(issue.state, state)) {
+          const error = new Error(`Invalid State ohange ${issue.state} => ${state}`);
+          logger.info({
+            message: error.message,
+            stack: error.stack
+          });
+          reject(error);
+        }
+      }).then(issue => {
+        logger.info(`Update issue ${issue} to ${state}`);
+        resolve(Issue.findByIdAndUpdate(id, { state: state }, { new: true }));
+      })
+      .catch(error => {
+        logger.info({ error });
+        reject(error);
+      });
+  });
 };
 
 const isStateChangeAllowed = (from, to) => {
