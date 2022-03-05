@@ -6,19 +6,19 @@ exports.createIssue = (req, res, next) => {
     res.status(400).send({ errors: validationResult(req).array() });
     return;
   }
-  service.createIssue(req.body).then(issue => res.send(issue)).catch(err => res.status(400).send(err));
+  service.createIssue(req.body).then(issue => res.send(issue)).catch(err => res.status(500).send(err.message));
 };
 
 exports.readIssue = (req, res, next) => {
   if (req.params.id === undefined) {
     service.readIssues()
-      .then(issues => res.send(issues))
-      .catch(err => res.send({ error: err }));
+      .then(issues => res.status(200).send(issues))
+      .catch(err => res.status(500).send(err.message));
     return;
   }
   service.readIssuesById(req.params.id)
-    .then(issues => res.send(issues === null ? {} : issues))
-    .catch(err => res.send({ error: err }));
+    .then(issues => res.staus(200).send(issues === null ? {} : issues))
+    .catch(err => res.status(500).send(err.message));
 };
 
 exports.stateChangeToInProgress = (req, res, next) => {
