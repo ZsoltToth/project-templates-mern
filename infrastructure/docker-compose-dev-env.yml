@@ -28,3 +28,27 @@ services:
       - '127.0.0.1:80:80'
     volumes:
       - './nginx/conf.d/proxy.conf:/etc/nginx/conf.d/default.conf:ro'
+  backend:
+    image: 'node:16.15.1'
+    user: 'node'
+    working_dir: '/home/node/app'
+    environment:
+      - 'NODE_ENV=test'
+      - 'DB_HOST=mongodb'
+      - 'DB_NAME=test'
+      - 'DB_USER=root'
+      - 'DB_PASSWORD=secret'
+    volumes:
+      - './backend:/home/node/app'
+    ports:
+      - '127.0.0.1:3000:3000'
+    command: 'npm start'  
+  frontend:
+    image: 'node:16.15.1'
+    user: 'node'
+    working_dir: '/home/node/app'
+    volumes:
+      - './frontend:/home/node/app'
+    ports:
+      - '127.0.0.1:3001:3001'
+    command: 'npm start'  
