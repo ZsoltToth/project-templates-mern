@@ -1,0 +1,12 @@
+@startuml
+
+package "Docker Compose"{
+    [nginx] as nginx
+    [frontend] as frontend
+    [backend] as backend
+    [mongodb] as mongodb
+}
+[localhost] as localhost
+
+localhost <--> nginx
+@enduml

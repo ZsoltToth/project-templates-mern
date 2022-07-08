@@ -29,6 +29,8 @@ mongoose.connect(dbConnectionString, {
 });
 
 const app = express();
+const cors = require('cors');
+app.use(cors());
 
 if (config.env === 'prod') {
   log.info({ config: config });
