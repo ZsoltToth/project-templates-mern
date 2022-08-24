@@ -77,6 +77,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const foodRouter = require('./routes/foodRouter');
 app.use('/issues', issuesRouter);
+app.use('/foods', foodRouter);
 
 module.exports = app;
