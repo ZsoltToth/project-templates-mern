@@ -6,4 +6,10 @@ const recordFood = (req, res) => {
     .catch(error => { res.status(500).send(error.message); });
 };
 
-module.exports = { recordFood };
+const fetchFoods = (req, res) => {
+  service.fetchFoods().then((docs) => {
+    res.status(200).send(docs);
+  });
+};
+
+module.exports = { recordFood, fetchFoods };

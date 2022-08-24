@@ -25,10 +25,9 @@ const controller = require('../controller/foodController');
  *                          items:
  *                            type: string
  *                          example: ["Fish", "Nuts"]
- *              image/png:
- *                schema:
- *                  type: string
- *                  format: binary
+ *                      image:
+ *                        type: string
+ *                        example: "base64 encoded image"
  *      responses:
  *          200:
  *              description: success
@@ -36,5 +35,16 @@ const controller = require('../controller/foodController');
  *              description: problem
  */
 router.post('/', controller.recordFood);
+
+/**
+ * @swagger
+ * /foods:
+ *  get:
+ *    summary: get all foods
+ *    responses:
+ *      200:
+ *        description: success
+ */
+router.get('/', controller.fetchFoods);
 
 module.exports = router;

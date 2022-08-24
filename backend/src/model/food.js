@@ -12,6 +12,10 @@ const FoodSchema = new mongoose.Schema({
   allergens: {
     type: [{ type: String }],
     required: true
+  },
+  image: {
+    type: String,
+    required: true
   }
 });
 
