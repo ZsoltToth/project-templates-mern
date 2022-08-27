@@ -13,7 +13,7 @@ function App () {
         <Grid container>
           <BrowserRouter>
 
-            <Grid item md={12} lg={12} justifyContent={'center'} direction={'column'}>
+            <Grid item md={12} lg={12}>
                 <Toolbar>
                   <Button variant={'contained'}>
                     <Link to={'/demo'}>Demo</Link>
