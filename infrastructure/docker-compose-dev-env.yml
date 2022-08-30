@@ -8,26 +8,27 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     ports:
       - '127.0.0.1:27017:27017'
-  elastic:
-    image: 'elasticsearch:7.14.2'
-    environment:
-      - discovery.type=single-node
-    ports:
-      - '127.0.01:9200:9200'
-  kibana:
-    image: 'kibana:7.14.2'
-    environment:
-      - 'ELASTICSEARCH_HOSTS=http://elastic:9200'
-    ports:
-      - '127.0.0.1:5601:5601'
-    depends_on:
-      - elastic
+#  elastic:
+#    image: 'elasticsearch:7.14.2'
+#    environment:
+#      - discovery.type=single-node
+#    ports:
+#      - '127.0.01:9200:9200'
+#  kibana:
+#    image: 'kibana:7.14.2'
+#    environment:
+#      - 'ELASTICSEARCH_HOSTS=http://elastic:9200'
+#    ports:
+#      - '127.0.0.1:5601:5601'
+#    depends_on:
+#      - elastic
   nginx:
     image: 'nginx:1.23'
     ports:
       - '127.0.0.1:80:80'
     volumes:
       - './nginx/conf.d/proxy.conf:/etc/nginx/conf.d/default.conf:ro'
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
     depends_on:
       - backend
       - frontend
