@@ -11,9 +11,10 @@ const convert2base64 = (image : File) : Promise<string> => {
   });
 };
 
-export const uploadFood = async ({ name, description, image }: {name : string, description: string, image: File}) => {
-  console.log({ name, description, image });
+export const uploadFood = async ({ name, description, allergens, image }: {name : string, description: string, allergens: string[], image: File | undefined}) => {
+  if (!image) {
+    return;
+  }
   const encodedImage : string = await convert2base64(image);
-  console.log({ encodedImage });
-  axios.post(FOODS_PATH, { name: name, description: description, allergens: ['Nuts'], image: encodedImage });
+  axios.post(FOODS_PATH, { name: name, description: description, allergens: allergens, image: encodedImage });
 };
